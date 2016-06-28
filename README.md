@@ -1,0 +1,1 @@
+like web3 but for minimalists
