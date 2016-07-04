@@ -7,7 +7,7 @@ module.exports = EthQuery
 
 function EthQuery(provider){
   const self = this
-  self.provider = provider
+  self.currentProvider = provider
 }
 
 //
