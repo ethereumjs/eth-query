@@ -64,9 +64,9 @@ EthQuery.prototype.submitHashrate =                      generateFnFor('eth_subm
 EthQuery.prototype.sendAsync = function(opts, cb){
   const self = this
   self.currentProvider.sendAsync(createPayload(opts), function(err, response){
-    err = err || response.error
+    if (!err && response.error) err = new Error('EthQuery - RPC Error - '+response.error.message)
     if (err) return cb(err)
-    // console.log(opts, response)
+    console.log(opts, response)
     cb(null, response.result)
   })
 }
