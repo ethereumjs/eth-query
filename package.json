@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.0.0-rc.6",
-    "ethereumjs-util": "^4.4.1",
+    "async": "^2.1.2",
+    "ethereumjs-util": "^4.5.0",
     "xtend": "^4.0.1"
   },
   "devDependencies": {},
