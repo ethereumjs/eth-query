@@ -1,6 +1,6 @@
 {
   "name": "eth-query",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "like web3 but for minimalists",
   "main": "index.js",
   "scripts": {
