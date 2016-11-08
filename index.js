@@ -1,6 +1,5 @@
 const extend = require('xtend')
 const async = require('async')
-const ethUtil = require('ethereumjs-util')
 
 module.exports = EthQuery
 
@@ -9,66 +8,6 @@ function EthQuery(provider){
   const self = this
   self.currentProvider = provider
 }
-
-//
-// higher level
-//
-
-EthQuery.prototype.getAccount = function(address, block, cb){
-  const self = this
-  async.parallel({
-    balance: self.getBalance.bind(self, address, block),
-    nonce: self.getTransactionCount.bind(self, address, block),
-    code: self.getCode.bind(self, address, block),
-  }, cb)
-}
-
-EthQuery.prototype.getBlockByHashWithUncles = function(blockHash, cb){
-  const self = this
-  self.getBlockByHash(blockHash, function(err, block){
-    if (err) return cb(err)
-    if (!block) return cb(null, null)
-    var count = block.uncles.length
-    async.times(count, function(index, cb){
-      self.getUncleByBlockHashAndIndex(blockHash, ethUtil.intToHex(index), cb)
-    }, function(err, uncles){
-      if (err) return cb(err)
-      block.uncles = uncles
-      cb(null, block)
-    })
-  })
-}
-
-EthQuery.prototype.getBlockByNumberWithUncles = function(blockNumber, cb){
-  const self = this
-  self.getBlockByNumber(blockNumber, function(err, block){
-    if (err) return cb(err)
-    if (!block) return cb(null, null)
-    var count = block.uncles.length
-    async.times(count, function(index, cb){
-      self.getUncleByBlockHashAndIndex(block.hash, ethUtil.intToHex(index), cb)
-    }, function(err, uncles){
-      if (err) return cb(err)
-      block.uncles = uncles
-      cb(null, block)
-    })
-  })
-}
-
-
-EthQuery.prototype.getLatestBlockNumber = function(cb){
-  const self = this
-  self.getLatestBlock(function(err, result){
-    if (err) return cb(err)
-    cb(null, result.number)
-  })
-}
-
-EthQuery.prototype.getLatestBlock = function(cb){
-  const self = this
-  self.getBlockByNumber('latest', true, cb)
-}
-
 
 //
 // base queries
