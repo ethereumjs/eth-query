@@ -1,5 +1,6 @@
 const extend = require('xtend')
 const async = require('async')
+const createRandomId = require('json-rpc-random-id')()
 
 module.exports = EthQuery
 
@@ -107,14 +108,4 @@ function createPayload(data){
     params: [],
     // user-specified
   }, data)
-}
-
-function createRandomId(){
-  const extraDigits = 3
-  // 13 time digits
-  var datePart = new Date().getTime()*Math.pow(10, extraDigits)
-  // 3 random digits
-  var extraPart = Math.floor(Math.random()*Math.pow(10, extraDigits))
-  // 16 digits
-  return datePart+extraPart
 }
