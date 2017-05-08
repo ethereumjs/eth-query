@@ -1,5 +1,4 @@
 const extend = require('xtend')
-const async = require('async')
 const createRandomId = require('json-rpc-random-id')()
 
 module.exports = EthQuery

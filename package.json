@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.1.2",
     "json-rpc-random-id": "^1.0.0",
     "xtend": "^4.0.1"
   },
