@@ -13,7 +13,7 @@ function EthQuery(provider){
 // base queries
 //
 
-// default block 
+// default block
 EthQuery.prototype.getBalance =                          generateFnWithDefaultBlockFor(2, 'eth_getBalance')
 EthQuery.prototype.getCode =                             generateFnWithDefaultBlockFor(2, 'eth_getCode')
 EthQuery.prototype.getTransactionCount =                 generateFnWithDefaultBlockFor(2, 'eth_getTransactionCount')
@@ -64,7 +64,6 @@ EthQuery.prototype.submitHashrate =                      generateFnFor('eth_subm
 EthQuery.prototype.sendAsync = function(opts, cb){
   const self = this
   self.currentProvider.sendAsync(createPayload(opts), function(err, response){
-    if (err || response.error) console.log('ethquery failure', opts, err || response.error)
     if (!err && response.error) err = new Error('EthQuery - RPC Error - '+response.error.message)
     if (err) return cb(err)
     cb(null, response.result)
